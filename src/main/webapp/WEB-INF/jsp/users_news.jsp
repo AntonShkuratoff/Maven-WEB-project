@@ -49,7 +49,7 @@
 	</div>
 
 	<c:forEach var="news" items="${requestScope.newsList}">
-		<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_offered_news&news_ID=${news.id}&news_tipe=offered">			
+		<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_offered_news&news_ID=${news.id}&news_type=offered">			
 			<div>
 				<fieldset>
 					<legend>${news.title}</legend>				

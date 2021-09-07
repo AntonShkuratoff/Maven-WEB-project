@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.Comment;
 import by.itacademy.newsportal.bean.News;
 import by.itacademy.newsportal.bean.User;
@@ -19,12 +22,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToNewsPage implements Command {
+	private static final Logger log = LogManager.getLogger(GoToNewsPage.class);
+	
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 	
 	private final static String FORWARD_ADMIN_PAGE_PATH = "/WEB-INF/jsp/admin_news_page.jsp";
 	private final static String FORWARD_USER_PAGE_PATH = "/WEB-INF/jsp/news_page.jsp";
-	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";	
+	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
+	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 
 	private final static String COMMENTS_LIST_ATTRIBUTE = "commentsList";
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
@@ -34,7 +40,7 @@ public class GoToNewsPage implements Command {
 	private final static String ADMIN = "admin";
 	private final static String NEWS_ID = "news_ID";
 	private final static String FLAG = "flag";
-	private final static String NEWS_TIPE = "news_tipe";	
+	private final static String NEWS_TYPE = "news_type";	
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,14 +55,15 @@ public class GoToNewsPage implements Command {
 		session.setAttribute(LAST_COMMAND_ATTRIBUTE, CommandName.GO_TO_NEWS_PAGE.toString());		
 
 		if (request.getParameter(NEWS_ID) != null && 
-			request.getParameter(NEWS_TIPE) != null && 
+			request.getParameter(NEWS_TYPE) != null && 
 			session.getAttribute(USER) != null) 
 		{
 			newsId = Integer.valueOf(request.getParameter(NEWS_ID));
 			user = (User) session.getAttribute(USER);
 			userId = user.getId();
-			newsTipe = request.getParameter(NEWS_TIPE);
+			newsTipe = request.getParameter(NEWS_TYPE);
 		} else {
+			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}

@@ -3,6 +3,9 @@ package by.itacademy.newsportal.controller.impl;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.News;
 import by.itacademy.newsportal.bean.User;
 import by.itacademy.newsportal.controller.Command;

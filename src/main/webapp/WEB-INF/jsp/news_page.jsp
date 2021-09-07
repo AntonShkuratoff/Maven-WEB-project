@@ -59,7 +59,7 @@
 			</form>
 			</c:if>
 			
-			<c:if test="${sessionScope.flag}">
+			<c:if test="${requestScope.flag}">
 			<form action="Controller" method="post">
 						<input type="hidden" name="command" value="DELETE_FROM_FAVORITE" />						 
 						<input type="hidden" name="userId" value="${sessionScope.user.id}" /> 

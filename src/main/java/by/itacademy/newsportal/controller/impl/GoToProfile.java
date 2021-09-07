@@ -2,6 +2,9 @@ package by.itacademy.newsportal.controller.impl;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.RegistrationInfo;
 import by.itacademy.newsportal.bean.User;
 import by.itacademy.newsportal.controller.Command;
@@ -16,11 +19,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class GoToProfile implements Command {
+	private static final Logger log = LogManager.getLogger(GoToProfile.class);
+	
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final UserService USER_SERVICE = PROVIDER.getUserService();
 	
 	private final String FORWARD_PATH = "/WEB-INF/jsp/profile.jsp";
 	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
+	private final static String SESSION_IS_DEAD = "Session is dead.";
 	
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
 	private final static String REGISTRATION_INFO_ATTRIBUTE = "registrationInfo";
@@ -40,6 +46,7 @@ public class GoToProfile implements Command {
 			user = (User) session.getAttribute(USER);
 			login = user.getLogin();
 		} else {
+			log.error(SESSION_IS_DEAD);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}

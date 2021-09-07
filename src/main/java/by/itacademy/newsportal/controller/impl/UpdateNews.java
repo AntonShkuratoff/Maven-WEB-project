@@ -2,22 +2,27 @@ package by.itacademy.newsportal.controller.impl;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.News;
 import by.itacademy.newsportal.controller.Command;
 import by.itacademy.newsportal.service.NewsService;
 import by.itacademy.newsportal.service.ServiceException;
 import by.itacademy.newsportal.service.ServiceProvider;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class UpdateNews implements Command {
+	private static final Logger log = LogManager.getLogger(UpdateNews.class);
+	
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 	
 	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
 	private final static String REDIRECT_SUCCESS_PATH = "Controller?command=GO_TO_SUCCESS_PAGE";
+	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 	
 	private final static String NEWS_TITLE = "title";
 	private final static String NEWS_BRIEF = "brief";
@@ -51,6 +56,7 @@ public class UpdateNews implements Command {
 			userId = Integer.parseInt(request.getParameter(USER_ID));
 			news = new News(newsId, userId, title, brief, content);
 		} else {
+			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}

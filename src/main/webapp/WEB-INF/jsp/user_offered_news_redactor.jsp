@@ -49,7 +49,7 @@
 	
 	<form action="Controller" method="post">
 		<input type="hidden" name="command" value="delete_news" />
-		<input type="hidden" name="news_tipe" value="offered" />					
+		<input type="hidden" name="news_type" value="offered" />					
 		<input type="hidden" name="newsId" value="${requestScope.news.id}" />					
 		<input type="submit" value="DELETE">		
 	</form>	

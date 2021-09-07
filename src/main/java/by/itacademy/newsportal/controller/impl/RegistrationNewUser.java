@@ -3,6 +3,9 @@ package by.itacademy.newsportal.controller.impl;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.RegistrationInfo;
 import by.itacademy.newsportal.controller.Command;
 import by.itacademy.newsportal.service.ServiceException;
@@ -14,12 +17,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class RegistrationNewUser implements Command {
+	private static final Logger log = LogManager.getLogger(RegistrationNewUser.class);
+	
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final UserService USER_SERVICE = PROVIDER.getUserService();
 	
 	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
 	private final static String REDIRECT_SUCCESS_PATH = "Controller?command=GO_TO_SUCCESS_PAGE";
 	private final static String FORWARD_UNKNOWN_COMMAND_PAGE_PATH = "/WEB-INF/jsp/unknown_command_page.jsp";
+	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 	
 	private final static String LOGIN = "login";
 	private final static String PASSWORD = "password";
@@ -65,6 +71,7 @@ public class RegistrationNewUser implements Command {
 			email = request.getParameter(EMAIL);
 			info = new RegistrationInfo(surname, name, patronymic, birthday, login, password, email);			
 		} else {
+			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}		

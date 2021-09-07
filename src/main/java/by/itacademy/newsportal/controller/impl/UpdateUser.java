@@ -3,6 +3,9 @@ package by.itacademy.newsportal.controller.impl;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.RegistrationInfo;
 import by.itacademy.newsportal.bean.User;
 import by.itacademy.newsportal.controller.Command;
@@ -16,12 +19,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class UpdateUser implements Command {
+	private static final Logger log = LogManager.getLogger(UpdateUser.class);
+	
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final UserService USER_SERVICE = PROVIDER.getUserService();
 	
 	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
 	private final static String REDIRECT_SUCCESS_PATH = "Controller?command=GO_TO_SUCCESS_PAGE";
 	private final static String FORWARD_UNKNOWN_COMMAND_PAGE_PATH = "/WEB-INF/jsp/unknown_command_page.jsp";
+	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 	
 	private final static String LOGIN = "login";
 	private final static String PASSWORD = "password";
@@ -60,9 +66,8 @@ public class UpdateUser implements Command {
 			request.getParameter(LOGIN) != null &&
 			request.getParameter(PASSWORD) != null &&
 			request.getParameter(EMAIL) != null &&
-			session.getAttribute(USER) != null)
-			
-		{
+			session.getAttribute(USER) != null)	
+		{		
 			surname = request.getParameter(SURNAME);
 			name = request.getParameter(NAME);
 			patronymic = request.getParameter(PATRONYMIC);
@@ -74,6 +79,7 @@ public class UpdateUser implements Command {
 			user = (User) session.getAttribute(USER);
 			oldLogin = user.getLogin();
 		} else {
+			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}		

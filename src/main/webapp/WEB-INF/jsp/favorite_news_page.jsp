@@ -48,7 +48,7 @@
 	</div>
 	<h2>Favorite News</h2>
 	<c:forEach var="news" items="${requestScope.newsList}">
-		<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_news_page&news_ID=${news.id}">				
+		<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_news_page&news_type=published&news_ID=${news.id}">				
 				<div>
 					<fieldset>
 						<legend>${news.title}</legend>				

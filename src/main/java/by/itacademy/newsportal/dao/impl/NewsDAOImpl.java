@@ -59,8 +59,8 @@ public class NewsDAOImpl implements NewsDAO {
 	private final static String ROLE_ADMIN = "ADMIN";
 	private final static String ROLE_USER = "USER";
 	private final static String ROLE_USER_ADMIN = "USER_ADMIN";
-	private final static String NEWS_TIPE_OFFERED = "offered";
-	private final static String NEWS_TIPE_PUBLISHED = "published";
+	private final static String NEWS_TYPE_OFFERED = "offered";
+	private final static String NEWS_TYPE_PUBLISHED = "published";
 
 	@Override
 	public boolean addNews(News news, String role) throws DAOException {
@@ -84,7 +84,7 @@ public class NewsDAOImpl implements NewsDAO {
 			ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
 			ps.setInt(5, news.getUserId());
 			flag = ps.executeUpdate() > 0;
-			deleteNews(news.getId(), NEWS_TIPE_OFFERED, con);
+			deleteNews(news.getId(), NEWS_TYPE_OFFERED, con);
 		} catch (SQLException | ConnectionPoolException e) {
 			log.error(e);
 			throw new DAOException(e);
@@ -241,9 +241,9 @@ public class NewsDAOImpl implements NewsDAO {
 			connectionPool = ConnectionPool.getInstance();
 			con = connectionPool.takeConnection();
 
-			if (NEWS_TIPE_PUBLISHED.equals(newsTipe)) {
+			if (NEWS_TYPE_PUBLISHED.equals(newsTipe)) {
 				ps = con.prepareStatement(GET_PUBLISHED_NEWS_BY_ID_SQL);
-			} else if (NEWS_TIPE_OFFERED.equals(newsTipe)) {
+			} else if (NEWS_TYPE_OFFERED.equals(newsTipe)) {
 				ps = con.prepareStatement(GET_OFFERED_NEWS_BY_ID_SQL);
 			}
 
@@ -293,9 +293,9 @@ public class NewsDAOImpl implements NewsDAO {
 				con = connection;
 			}
 
-			if (NEWS_TIPE_PUBLISHED.equals(newsTipe)) {
+			if (NEWS_TYPE_PUBLISHED.equals(newsTipe)) {
 				ps = con.prepareStatement(DELETE_PUBLISHED_NEWS_BY_ID_SQL);
-			} else if (NEWS_TIPE_OFFERED.equals(newsTipe)) {
+			} else if (NEWS_TYPE_OFFERED.equals(newsTipe)) {
 				ps = con.prepareStatement(DELETE_OFFERED_NEWS_BY_ID_SQL);
 			} else {
 				log.error("Unknown news type.");

@@ -3,6 +3,9 @@ package by.itacademy.newsportal.controller.impl;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.News;
 import by.itacademy.newsportal.controller.Command;
 import by.itacademy.newsportal.controller.CommandName;
@@ -15,11 +18,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToUsersNews implements Command {
+	private static final Logger log = LogManager.getLogger(GoToUsersNews.class);
+	
 	private final static ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private final static NewsService NEWS_SERVICE = PROVIDER.getNewsService();
 	
 	private final static String USERS_NEWS_PAGE_PATH = "/WEB-INF/jsp/users_news.jsp";
 	private final static String REDIRECT_UNKNOWN_COMMAND_PATH = "Controller?command=UNKNOWN_COMMAND";
+	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 	
 	private final static String NEWS_LIST_ATTRIBUTE = "newsList";
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
@@ -40,6 +46,7 @@ public class GoToUsersNews implements Command {
 			userId = Integer.parseInt(request.getParameter(USER_ID));
 			role = request.getParameter(USER_ROLE);
 		} else {
+			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}

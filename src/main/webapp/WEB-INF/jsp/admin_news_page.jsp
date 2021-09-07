@@ -61,7 +61,7 @@
 	<form action="Controller" method="post">
 		<input type="hidden" name="command" value="delete_news" />
 		<input type="hidden" name="newsId" value="${requestScope.news.id}" />
-		<input type="hidden" name="news_tipe" value="published" />
+		<input type="hidden" name="news_type" value="published" />
 		<input type="hidden" name="role" value="ADMIN" />
 		<fieldset>
 			<legend>Delete news</legend>			

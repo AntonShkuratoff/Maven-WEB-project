@@ -20,6 +20,94 @@
 
 	<loggers>
 
+		<logger name="by.itacademy.newsportal.controller.impl.AddNews"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger name="by.itacademy.newsportal.controller.impl.GetUser"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.DeleteComment"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.DeleteNews"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.DeleteNewsFromFavorite"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.GoToFavorite"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.GoToNewsPage"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.GoToOfferedNews"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.GoToProfile"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.GoToUsersNews"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.PutNewsToFavorite"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.RegistrationNewUser"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.SendComment"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.UpdateNews"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger
+			name="by.itacademy.newsportal.controller.impl.UpdateUser"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
 		<logger name="by.itacademy.newsportal.dao.impl.NewsDAOImpl"
 			level="warn" additivity="true">
 			<appender-ref ref="STDOUT" />
