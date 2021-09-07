@@ -51,7 +51,6 @@ public class UpdateNews implements Command {
 			userId = Integer.parseInt(request.getParameter(USER_ID));
 			news = new News(newsId, userId, title, brief, content);
 		} else {
-			// logging
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}
@@ -60,7 +59,6 @@ public class UpdateNews implements Command {
 			NEWS_SERVICE.updateNews(news, role);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

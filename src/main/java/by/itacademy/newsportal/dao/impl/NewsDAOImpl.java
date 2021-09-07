@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.Comment;
 import by.itacademy.newsportal.bean.News;
 import by.itacademy.newsportal.bean.RegistrationInfo;
@@ -19,6 +22,8 @@ import by.itacademy.newsportal.dao.connectionpool.ConnectionPool;
 import by.itacademy.newsportal.dao.connectionpool.ConnectionPoolException;
 
 public class NewsDAOImpl implements NewsDAO {
+	private static final Logger log = LogManager.getLogger(NewsDAOImpl.class);
+
 	private static ConnectionPool connectionPool = null;
 	private static final UserDAO USER_DAO = new UserDAOImpl();
 
@@ -66,11 +71,11 @@ public class NewsDAOImpl implements NewsDAO {
 			connectionPool = ConnectionPool.getInstance();
 			con = connectionPool.takeConnection();
 
-			if (ROLE_ADMIN.equals(role)) {
+			if (ROLE_ADMIN.equalsIgnoreCase(role)) {
 				ps = con.prepareStatement(ADD_NEWS_SQL);
-			} else if (ROLE_USER.equals(role)) {
+			} else if (ROLE_USER.equalsIgnoreCase(role)) {
 				ps = con.prepareStatement(SUGGEST_NEWS_SQL);
-			} else if (ROLE_USER_ADMIN.equals(role)) {
+			} else if (ROLE_USER_ADMIN.equalsIgnoreCase(role)) {
 				ps = con.prepareStatement(ADD_NEWS_SQL);
 			}
 			ps.setString(1, news.getTitle());
@@ -81,13 +86,13 @@ public class NewsDAOImpl implements NewsDAO {
 			flag = ps.executeUpdate() > 0;
 			deleteNews(news.getId(), NEWS_TIPE_OFFERED, con);
 		} catch (SQLException | ConnectionPoolException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -109,15 +114,14 @@ public class NewsDAOImpl implements NewsDAO {
 			while (rs.next()) {
 				numberOfEntries = rs.getInt(NUMBER_OF_ENTRIES);
 			}
-
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -154,13 +158,13 @@ public class NewsDAOImpl implements NewsDAO {
 			}
 
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -203,14 +207,14 @@ public class NewsDAOImpl implements NewsDAO {
 			}
 
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			if (connection == null) {
 				try {
 					connectionPool.closeConnection(con, ps, rs);
 				} catch (ConnectionPoolException e) {
-					// logging
+					log.error(e);
 					throw new DAOException(e);
 				}
 			} else {
@@ -218,11 +222,10 @@ public class NewsDAOImpl implements NewsDAO {
 					rs.close();
 					ps.close();
 				} catch (SQLException e) {
-					// logging
+					log.error(e);
 					throw new DAOException(e);
 				}
 			}
-
 		}
 		return news;
 	}
@@ -263,13 +266,13 @@ public class NewsDAOImpl implements NewsDAO {
 				news = new News(id, userId, title, brief, content, date);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -295,7 +298,7 @@ public class NewsDAOImpl implements NewsDAO {
 			} else if (NEWS_TIPE_OFFERED.equals(newsTipe)) {
 				ps = con.prepareStatement(DELETE_OFFERED_NEWS_BY_ID_SQL);
 			} else {
-				// logging
+				log.error("Unknown news type.");
 				throw new DAOException();
 			}
 
@@ -303,21 +306,21 @@ public class NewsDAOImpl implements NewsDAO {
 			flag = ps.executeUpdate() > 0;
 			ps.close();
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			if (connection == null) {
 				try {
 					connectionPool.closeConnection(con, ps);
 				} catch (ConnectionPoolException e) {
-					// logging
+					log.error(e);
 					throw new DAOException(e);
 				}
 			} else {
 				try {
 					ps.close();
 				} catch (SQLException e) {
-					// logging
+					log.error(e);
 					throw new DAOException(e);
 				}
 			}
@@ -351,13 +354,13 @@ public class NewsDAOImpl implements NewsDAO {
 
 			flag = ps.executeUpdate() > 0;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -378,14 +381,13 @@ public class NewsDAOImpl implements NewsDAO {
 			ps.setInt(2, newsId);
 			flag = ps.executeUpdate() > 0;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
-			// Add method name to error
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -412,13 +414,13 @@ public class NewsDAOImpl implements NewsDAO {
 				newsList.add(news);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -441,13 +443,13 @@ public class NewsDAOImpl implements NewsDAO {
 			rs = ps.executeQuery();
 			flag = rs.next();
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -469,13 +471,13 @@ public class NewsDAOImpl implements NewsDAO {
 			flag = ps.executeUpdate() > 0;
 			ps.close();
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -498,13 +500,13 @@ public class NewsDAOImpl implements NewsDAO {
 			ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
 			flag = ps.executeUpdate() > 0;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -543,13 +545,13 @@ public class NewsDAOImpl implements NewsDAO {
 				commentList.add(comment);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -570,13 +572,13 @@ public class NewsDAOImpl implements NewsDAO {
 			ps.setInt(2, userId);
 			flag = ps.executeUpdate() > 0;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -618,13 +620,13 @@ public class NewsDAOImpl implements NewsDAO {
 				newsList.add(news);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}

@@ -88,7 +88,6 @@ public class UpdateUser implements Command {
 			session.setAttribute(USER, user);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH);
 		} catch (ServiceException | ServletException | IOException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}		

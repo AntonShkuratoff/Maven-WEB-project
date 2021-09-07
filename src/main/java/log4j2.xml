@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<Properties>
+		<Property name="filename">logs/log.log</Property>
+		<Property name="basePatterLayout">%d{ABSOLUTE} [%-5p] (%F:%M:%L) - %m%n
+		</Property>
+	</Properties>
+	<appenders>
+
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="${basePatterLayout}" />
+		</Console>
+
+		<File name="A1" fileName="logs/test.log" append="true">
+			<PatternLayout pattern="${basePatterLayout}" />
+		</File>
+
+	</appenders>
+
+	<loggers>
+
+		<logger name="by.itacademy.newsportal.dao.impl.NewsDAOImpl"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<logger name="by.itacademy.newsportal.dao.impl.UserDAOImpl"
+			level="warn" additivity="true">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<root level="warn">
+			<appender-ref ref="A1" />
+		</root>
+
+	</loggers>
+</configuration>

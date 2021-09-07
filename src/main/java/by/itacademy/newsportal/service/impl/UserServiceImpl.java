@@ -17,10 +17,6 @@ public class UserServiceImpl implements UserService {
 	private static final DAOProvider DAO_PROVIDER = DAOProvider.getDaoProvider();
 	private static final UserDAO USER_DAO = DAO_PROVIDER.getUSER_DAO();	
 	
-	private final static String ERROR_REGISTRAION_METHOD_SERVICE = "\nError in registraition Service method.\n";
-	private final static String ERROR_UPDATE_USER_METHOD_SERVICE = "\nError in updateUser Service method.\n";
-	private final static String ERROR_TAKE_USER_INFORMATION_METHOD_SERVICE = "\nError in takeUserInformation Service method.\n";
-	private final static String ERROR_AUTHORIZATION_METHOD_SERVICE = "\nError in authorization Service method.\n";
 	private final static String INCORRECT_PARAMETER = "You entered an incorrect ";
 	
 	private final static String LOGIN = "login";
@@ -49,7 +45,7 @@ public class UserServiceImpl implements UserService {
 			USER_DAO.registrationUser(info);
 			return null;
 		} catch (DAOException e) {
-			throw new ServiceException(ERROR_REGISTRAION_METHOD_SERVICE, e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -63,7 +59,7 @@ public class UserServiceImpl implements UserService {
 			USER_DAO.updateUser(info, login);
 			return null;
 		} catch (DAOException e) {
-			throw new ServiceException(ERROR_UPDATE_USER_METHOD_SERVICE, e);
+			throw new ServiceException(e);
 		}
 	}
 	
@@ -85,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			return USER_DAO.takeUserInformation(login);
 		} catch (DAOException e) {
-			throw new ServiceException(ERROR_TAKE_USER_INFORMATION_METHOD_SERVICE, e);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -112,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			return USER_DAO.authorization(login, password);
 		} catch (DAOException e) {
-			throw new ServiceException(ERROR_AUTHORIZATION_METHOD_SERVICE, e);
+			throw new ServiceException(e);
 		}
 	}
 }

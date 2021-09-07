@@ -66,7 +66,6 @@ public class GoToNewsPage implements Command {
 			commentsList = NEWS_SERVICE.selectNewsComments(newsId);
 			flag = NEWS_SERVICE.isFavorite(userId, newsId);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;

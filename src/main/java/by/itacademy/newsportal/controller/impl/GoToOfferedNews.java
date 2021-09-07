@@ -55,7 +55,6 @@ public class GoToOfferedNews implements Command {
 		try {
 			news = NEWS_SERVICE.getNewsByID(news_ID, newsTipe);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;

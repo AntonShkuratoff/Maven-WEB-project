@@ -48,7 +48,6 @@ public class GoToFavorite implements Command {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(FORWARD_PATH);
 			requestDispatcher.forward(request, response);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

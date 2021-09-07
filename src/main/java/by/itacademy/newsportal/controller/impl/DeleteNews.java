@@ -41,7 +41,6 @@ public class DeleteNews implements Command {
 			NEWS_SERVICE.deleteNews(newsId, newsTipe);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);			
 		}

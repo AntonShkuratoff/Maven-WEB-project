@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.itacademy.newsportal.bean.RegistrationInfo;
 import by.itacademy.newsportal.bean.Role;
 import by.itacademy.newsportal.bean.User;
@@ -14,6 +17,8 @@ import by.itacademy.newsportal.dao.connectionpool.ConnectionPool;
 import by.itacademy.newsportal.dao.connectionpool.ConnectionPoolException;
 
 public class UserDAOImpl implements UserDAO {
+	private static final Logger log = LogManager.getLogger(UserDAOImpl.class);
+	
 	private static ConnectionPool connectionPool = null;
 
 	private final static String REGISTRATE_NEW_USER_SQL = "INSERT INTO users(surname, name, patronymic, birthday, login, password, email) VALUES(?,?,?,?,?,?,?)";
@@ -22,16 +27,7 @@ public class UserDAOImpl implements UserDAO {
 	private final static String UPDATE_USER_SQL = "UPDATE users SET surname=?, name=?, patronymic=?, birthday=?, login=?, password=?, email=? WHERE login=?";
 	private final static String TAKE_USER_INFORMATION_BY_LOGIN_SQL = "SELECT * FROM users WHERE login=?";
 	private final static String TAKE_USER_INFORMATION_BY_ID_SQL = "SELECT * FROM users WHERE id=?";
-
-	private final static String ERROR_PREPEAR_STATEMENT = "\nError executing the Prepear Statement";
-	private final static String ERROR_CONNECTION_POOL = "\nError in connectionPool";
-	private final static String ERROR_RESULT_SET = "\nError with Result Set";
-	private final static String REG_USER_METHOD_DAO = " in registrationUser DAO method.\n";
-	private final static String AUTH_USER_METHOD_DAO = " in authorization DAO method.\n";
-	private final static String DELETE_USER_METHOD_DAO = " in deleteUser DAO method.\n";
-	private final static String UPDATE_USER_METHOD_DAO = " in updateUser DAO method.\n";
-	private final static String TAKE_USER_INFORM_METHOD_DAO = " in takeUserInformation DAO method.\n";
-
+	
 	private final static String ID = "id";
 	private final static String LOGIN = "login";
 	private final static String ROLE = "role";
@@ -60,13 +56,13 @@ public class UserDAOImpl implements UserDAO {
 			ps.executeUpdate();
 
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -97,13 +93,13 @@ public class UserDAOImpl implements UserDAO {
 				user = new User(id, log, Role.valueOf(role));
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -123,13 +119,13 @@ public class UserDAOImpl implements UserDAO {
 			flag = ps.executeUpdate() > 0;
 			return flag;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -156,13 +152,13 @@ public class UserDAOImpl implements UserDAO {
 			flag = ps.executeUpdate() > 0;
 			return flag;
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -198,13 +194,13 @@ public class UserDAOImpl implements UserDAO {
 				info = new RegistrationInfo(surname, name, patronymic, birthday, log, email);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
+			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}
@@ -235,13 +231,13 @@ public class UserDAOImpl implements UserDAO {
 				info = new RegistrationInfo(surname, name, patronymic, birthday, log, email);
 			}
 		} catch (ConnectionPoolException | SQLException e) {
-			// logging
-			throw new DAOException(ERROR_CONNECTION_POOL + TAKE_USER_INFORM_METHOD_DAO, e);
+			log.error(e);
+			throw new DAOException(e);
 		} finally {
 			try {
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
-				// logging
+				log.error(e);
 				throw new DAOException(e);
 			}
 		}

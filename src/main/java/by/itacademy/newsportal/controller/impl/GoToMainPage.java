@@ -48,7 +48,6 @@ public class GoToMainPage implements Command {
 		try {
 			numberOfEntries = NEWS_SERVICE.getNumberOfEntries();
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
@@ -65,7 +64,6 @@ public class GoToMainPage implements Command {
 		try {
 			newsList = NEWS_SERVICE.getLastNews(startWith, TOTAL);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
@@ -93,11 +91,9 @@ public class GoToMainPage implements Command {
 			}
 			requestDispatcher.forward(request, response);
 		} catch (ServletException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		} catch (IOException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

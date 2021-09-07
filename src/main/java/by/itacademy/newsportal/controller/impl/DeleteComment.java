@@ -43,7 +43,6 @@ public class DeleteComment implements Command {
 			NEWS_SERVICE.deleteComment(userId, commentId);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH + newsId);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;

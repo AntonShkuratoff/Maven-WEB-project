@@ -37,7 +37,6 @@ public class GetUser implements Command {
 			login = request.getParameter(LOGIN);
 			password = request.getParameter(PASSWORD);
 		} else {
-			// logging
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}
@@ -48,7 +47,6 @@ public class GetUser implements Command {
 			session.setMaxInactiveInterval(SESSION_MAX_INACTIVE_INTERVAL);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

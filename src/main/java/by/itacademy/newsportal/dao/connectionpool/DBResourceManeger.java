@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 public class DBResourceManeger {
 	private final static DBResourceManeger INSTANCE = new DBResourceManeger();
 	
-	private ResourceBundle bundle = ResourceBundle.getBundle("resources.properties.db");
+	private ResourceBundle bundle = ResourceBundle.getBundle("resources.properties.db");	
 	
 	public static DBResourceManeger getInstance() {
 		return INSTANCE;

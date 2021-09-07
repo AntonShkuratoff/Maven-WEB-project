@@ -63,8 +63,7 @@ public class AddNews implements Command {
 		try {
 			NEWS_SERVICE.addNews(news, userRole);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH);
-		} catch (ServiceException e) {
-			// logging
+		} catch (ServiceException e) {			
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

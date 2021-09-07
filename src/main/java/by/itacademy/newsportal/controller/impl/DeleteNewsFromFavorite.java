@@ -39,7 +39,6 @@ public class DeleteNewsFromFavorite implements Command {
 			NEWS_SERVICE.deleteNewsFromFavorite(userId, newsId);
 			response.sendRedirect(REDIRECT_SUCCESS_PATH + newsId);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 		}

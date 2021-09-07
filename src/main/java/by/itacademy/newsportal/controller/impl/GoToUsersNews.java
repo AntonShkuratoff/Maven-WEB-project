@@ -40,7 +40,6 @@ public class GoToUsersNews implements Command {
 			userId = Integer.parseInt(request.getParameter(USER_ID));
 			role = request.getParameter(USER_ROLE);
 		} else {
-			// logging
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
 		}
@@ -48,7 +47,6 @@ public class GoToUsersNews implements Command {
 		try {
 			newsList = NEWS_SERVICE.getOfferedNews(role, userId);
 		} catch (ServiceException e) {
-			// logging
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
