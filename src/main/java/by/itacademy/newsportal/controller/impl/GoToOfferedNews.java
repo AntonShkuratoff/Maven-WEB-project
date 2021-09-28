@@ -30,6 +30,8 @@ public class GoToOfferedNews implements Command {
 	private final static String LOG_NOT_ALL_REQUEST_PARAMETERS = "Not all request parameters are available";
 	
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
+	private final static String LAST_COMMAND_VALUE_NEWS_ID = "GO_TO_OFFERED_NEWS&news_ID=";
+	private final static String LAST_COMMAND_VALUE_NEWS_TYPE = "&news_type=";
 	
 	private final static String USER = "user";
 	private final static String NEWS = "news";
@@ -39,20 +41,19 @@ public class GoToOfferedNews implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int news_ID = -1;
-		String newsTipe = null;
+		int newsId = -1;
+		String newsType = null;
 		News news = null;
 		User user = null;
-		HttpSession session = request.getSession();
-		session.setAttribute(LAST_COMMAND_ATTRIBUTE, CommandName.GO_TO_OFFERED_NEWS.toString());
+		HttpSession session = request.getSession();		
 
 		if (request.getParameter(NEWS_ID) != null && 
 			request.getParameter(NEWS_TYPE) != null && 
 			session.getAttribute(USER) != null) 
 		{
-			news_ID = Integer.valueOf(request.getParameter(NEWS_ID));
+			newsId = Integer.valueOf(request.getParameter(NEWS_ID));
 			user = (User) session.getAttribute(USER);
-			newsTipe = request.getParameter(NEWS_TYPE);
+			newsType = request.getParameter(NEWS_TYPE);
 		} else {
 			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
@@ -60,7 +61,7 @@ public class GoToOfferedNews implements Command {
 		}
 
 		try {
-			news = NEWS_SERVICE.getNewsByID(news_ID, newsTipe);
+			news = NEWS_SERVICE.getNewsByID(newsId, newsType);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
@@ -68,6 +69,7 @@ public class GoToOfferedNews implements Command {
 		}
 
 		request.setAttribute(NEWS, news);
+		session.setAttribute(LAST_COMMAND_ATTRIBUTE, LAST_COMMAND_VALUE_NEWS_ID + newsId + LAST_COMMAND_VALUE_NEWS_TYPE + newsType);
 
 		String path = null;
 		if (ADMIN.equalsIgnoreCase(user.getRole().toString())) {

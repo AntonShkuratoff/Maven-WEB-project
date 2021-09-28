@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.itacademy.newsportal.bean.News;
+import by.itacademy.newsportal.bean.User;
 import by.itacademy.newsportal.controller.Command;
 import by.itacademy.newsportal.controller.CommandName;
 import by.itacademy.newsportal.service.NewsService;
@@ -16,6 +17,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class GoToUsersNews implements Command {
 	private static final Logger log = LogManager.getLogger(GoToUsersNews.class);
@@ -30,21 +32,21 @@ public class GoToUsersNews implements Command {
 	private final static String NEWS_LIST_ATTRIBUTE = "newsList";
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
 	
-	private final static String USER_ID = "userId";
-	private final static String USER_ROLE = "role";
+	private final static String USER_ATTRIBUTE = "user";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = null;
+		HttpSession session = request.getSession();
 		String role = null;
 		int userId = -1;
 		List<News> newsList = null;
 		request.getSession().setAttribute(LAST_COMMAND_ATTRIBUTE, CommandName.GO_TO_USERS_NEWS.toString());
 
-		if (request.getParameter(USER_ID) != null && 
-			request.getParameter(USER_ROLE) != null) 
-		{
-			userId = Integer.parseInt(request.getParameter(USER_ID));
-			role = request.getParameter(USER_ROLE);
+		if (session.getAttribute(USER_ATTRIBUTE) != null) {
+			user = (User) session.getAttribute(USER_ATTRIBUTE);
+			userId = user.getId();
+			role = user.getRole().toString();
 		} else {
 			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);

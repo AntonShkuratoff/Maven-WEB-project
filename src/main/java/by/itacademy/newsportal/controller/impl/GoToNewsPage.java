@@ -34,6 +34,8 @@ public class GoToNewsPage implements Command {
 
 	private final static String COMMENTS_LIST_ATTRIBUTE = "commentsList";
 	private final static String LAST_COMMAND_ATTRIBUTE = "lastCommand";
+	private final static String LAST_COMMAND_VALUE_NEWS_ID = "GO_TO_NEWS_PAGE&news_ID=";
+	private final static String LAST_COMMAND_VALUE_NEWS_TYPE = "&news_type=";
 	
 	private final static String USER = "user";
 	private final static String NEWS = "news";
@@ -51,8 +53,7 @@ public class GoToNewsPage implements Command {
 		News news = null;
 		User user = null;
 		List<Comment> commentsList = new ArrayList<Comment>();
-		HttpSession session = request.getSession();
-		session.setAttribute(LAST_COMMAND_ATTRIBUTE, CommandName.GO_TO_NEWS_PAGE.toString());		
+		HttpSession session = request.getSession();				
 
 		if (request.getParameter(NEWS_ID) != null && 
 			request.getParameter(NEWS_TYPE) != null && 
@@ -81,6 +82,7 @@ public class GoToNewsPage implements Command {
 		request.setAttribute(NEWS, news);
 		request.setAttribute(COMMENTS_LIST_ATTRIBUTE, commentsList);
 		request.setAttribute(FLAG, flag);
+		session.setAttribute(LAST_COMMAND_ATTRIBUTE, LAST_COMMAND_VALUE_NEWS_ID + newsId + LAST_COMMAND_VALUE_NEWS_TYPE + newsTipe);
 
 		String path = null;
 		if (ADMIN.equalsIgnoreCase(user.getRole().toString())) {
@@ -90,5 +92,5 @@ public class GoToNewsPage implements Command {
 		}
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
 		requestDispatcher.forward(request, response);
-	}
+	}		
 }

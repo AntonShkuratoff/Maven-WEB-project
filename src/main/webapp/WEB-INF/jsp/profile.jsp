@@ -31,7 +31,7 @@
 <fmt:message bundle="${loc}" key="local.registration.month.september" var="september" />
 <fmt:message bundle="${loc}" key="local.registration.month.october" var="october" />
 <fmt:message bundle="${loc}" key="local.registration.month.november" var="november" />
-<fmt:message bundle="${loc}" key="local.registration.month.december" ar="december" />
+<fmt:message bundle="${loc}" key="local.registration.month.december" var="december" />
 <fmt:message bundle="${loc}" key="local.registration.recoveryInformation" var="recoveryInformation" />
 <fmt:message bundle="${loc}" key="local.login" var="login" />
 <fmt:message bundle="${loc}" key="local.password" var="password" />
