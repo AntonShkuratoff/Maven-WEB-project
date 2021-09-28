@@ -11,30 +11,36 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
+<fmt:message bundle="${loc}" key="local.delete" var="delete" />
+<fmt:message bundle="${loc}" key="local.news.title" var="news_title"/>
+<fmt:message bundle="${loc}" key="local.news.brief" var="news_brief"/>
+<fmt:message bundle="${loc}" key="local.news.content" var="news_content"/>
+<fmt:message bundle="${loc}" key="local.send" var="send" />
+<fmt:message bundle="${loc}" key="local.news.redactor" var="news_redactor"/>
+<fmt:message bundle="${loc}" key="local.news.newInformation" var="new_information"/>
 
 </head>
 <body>
-	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 	
 	<div class="buttons">
 		<div align="right">
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="set_locale" /> <input
-					type="hidden" name="local" value="ru" /> <input type="hidden"
-					name="page" value="/WEB-INF/jsp/admin_news_page.jsp" /> <input type="submit"
-					value="${ru_button}" />
+				<input type="hidden" name="command" value="set_locale" />
+				<input type="hidden" name="local" value="ru" />
+				<input type="hidden" name="page" value="/WEB-INF/jsp/admin_news_page.jsp" />
+				<input type="submit" value="${ru_button}" />
 			</form>
 		</div>
 		<div align="right">
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="set_locale" /> <input
-					type="hidden" name="local" value="en" /> <input type="hidden"
-					name="page" value="/WEB-INF/jsp/admin_news_page.jsp" /> <input type="submit"
-					value="${en_button}" />
+				<input type="hidden" name="command" value="set_locale" />
+				<input type="hidden" name="local" value="en" />
+				<input type="hidden" name="page" value="/WEB-INF/jsp/admin_news_page.jsp" />
+				<input type="submit" value="${en_button}" />
 			</form>
 		</div>
 	</div>
@@ -51,7 +57,7 @@
 		<input type="hidden" name="command" value="delete_news" />
 		<input type="hidden" name="news_type" value="offered" />					
 		<input type="hidden" name="newsId" value="${requestScope.news.id}" />					
-		<input type="submit" value="DELETE">		
+		<input type="submit" value="${delete}">		
 	</form>	
 	</fieldset>
 	
@@ -63,12 +69,12 @@
 		<input type="hidden" name="userId" value="${requestScope.news.userId}" />
 	
 		<fieldset>
-			<legend>News redactor</legend>
-			<p>Enter new information:</p>
-			<label><input type="text" name="title" value="Title" required></label><br>
-			<textarea name="brief" cols="100" rows="2">Brief</textarea><br>
-			<textarea name="content" cols="100" rows="10">Content</textarea><br>
-			<br> <input type="submit" value="Send">
+			<legend>${news_redactor}</legend>
+			<p>${new_information}</p>
+			<label><input type="text" name="title" value="${news_title}" required></label><br>
+			<textarea name="brief" cols="100" rows="2">${news_brief}</textarea><br>
+			<textarea name="content" cols="100" rows="10">${news_content}</textarea><br>
+			<br> <input type="submit" value="${send}">
 		</fieldset>
 	</form>	
 		

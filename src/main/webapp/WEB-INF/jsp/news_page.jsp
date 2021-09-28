@@ -12,30 +12,34 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
+<fmt:message bundle="${loc}" key="local.news.addToFavorite" var="add_to_favorite"/>
+<fmt:message bundle="${loc}" key="local.news.removeFromFavorite" var="remove_from_favorite"/>
+<fmt:message bundle="${loc}" key="local.delete" var="delete" />
+<fmt:message bundle="${loc}" key="local.send" var="send" />
+<fmt:message bundle="${loc}" key="local.comment.enter" var="enter_comment"/>
 
 </head>
 <body>
-	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 
 	<div class="buttons">
 		<div align="right">
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="set_locale" /> <input
-					type="hidden" name="local" value="ru" /> <input type="hidden"
-					name="page" value="/WEB-INF/jsp/news_page.jsp" /> <input
-					type="submit" value="${ru_button}" />
+				<input type="hidden" name="command" value="set_locale" />
+				<input type="hidden" name="local" value="ru" />
+				<input type="hidden" name="page" value="/WEB-INF/jsp/news_page.jsp" />
+				<input type="submit" value="${ru_button}" />
 			</form>
 		</div>
 		<div align="right">
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="set_locale" /> <input
-					type="hidden" name="local" value="en" /> <input type="hidden"
-					name="page" value="/WEB-INF/jsp/news_page.jsp" /> <input
-					type="submit" value="${en_button}" />
+				<input type="hidden" name="command" value="set_locale" />
+				<input type="hidden" name="local" value="en" />
+				<input type="hidden" name="page" value="/WEB-INF/jsp/news_page.jsp" />
+				<input type="submit" value="${en_button}" />
 			</form>
 		</div>
 	</div>
@@ -55,7 +59,7 @@
 						<input type="hidden" name="command" value="PUT_NEWS_TO_FAVORITE" />						 
 						<input type="hidden" name="userId" value="${sessionScope.user.id}" /> 
 						<input type="hidden" name="newsId" value="${requestScope.news.id}" /> 
-						<input type="submit" value="Add to favorite">
+						<input type="submit" value="${add_to_favorite}">
 			</form>
 			</c:if>
 			
@@ -64,7 +68,7 @@
 						<input type="hidden" name="command" value="DELETE_FROM_FAVORITE" />						 
 						<input type="hidden" name="userId" value="${sessionScope.user.id}" /> 
 						<input type="hidden" name="newsId" value="${requestScope.news.id}" /> 
-						<input type="submit" value="Remove from favorite">
+						<input type="submit" value="${remove_from_favorite}">
 			</form>
 			</c:if>
 				
@@ -84,7 +88,7 @@
 						<input type="hidden" name="commentId" value="${comment.id}" /> 
 						<input type="hidden" name="userId" value="${comment.userId}" /> 
 						<input type="hidden" name="newsId" value="${requestScope.news.id}" /> 
-						<input type="submit" value="Delete">
+						<input type="submit" value="${delete}">
 					</form>				
 				</c:if>
 			</fieldset>
@@ -97,10 +101,10 @@
 		<input type="hidden" name="newsId" value="${requestScope.news.id}" />
 
 		<fieldset>
-			<legend>Enter your comment:</legend>
+			<legend>${enter_comment}</legend>
 			<textarea name="content" cols="100" rows="4"></textarea>
 			<br> 
-			<input type="submit" value="Send">
+			<input type="submit" value="${send}">
 		</fieldset>
 	</form>
 	

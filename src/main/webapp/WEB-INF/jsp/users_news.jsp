@@ -13,35 +13,30 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.title" var="title" />
-<fmt:message bundle="${loc}" key="local.registration" var="registration" />
-<fmt:message bundle="${loc}" key="local.authorization"
-	var="authorization" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
 
 </head>
 <body>
-	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+	<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 	<div >
 		
 		<div >
 			<div align="right">
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="set_locale" /> <input
-						type="hidden" name="local" value="ru" /> <input type="hidden"
-						name="page" value="/WEB-INF/jsp/admin_main_page.jsp" /> <input type="submit"
-						value="${ru_button}" />
+					<input type="hidden" name="command" value="set_locale" />
+					<input type="hidden" name="local" value="ru" />
+					<input type="hidden" name="page" value="/WEB-INF/jsp/admin_main_page.jsp" />
+					<input type="submit" value="${ru_button}" />
 				</form>
 			</div>
 			<div align="right">
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="set_locale" /> <input
-						type="hidden" name="local" value="en" /> <input type="hidden"
-						name="page" value="/WEB-INF/jsp/admin_main_page.jsp" /> <input type="submit"
-						value="${en_button}" />
+					<input type="hidden" name="command" value="set_locale" />
+					<input type="hidden" name="local" value="en" />
+					<input type="hidden" name="page" value="/WEB-INF/jsp/admin_main_page.jsp" />
+					<input type="submit" value="${en_button}" />
 				</form>
 			</div>
 		</div>		

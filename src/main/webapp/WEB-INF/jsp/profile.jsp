@@ -13,84 +13,65 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.registration.head" var="head" />
-<fmt:message bundle="${loc}"
-	key="local.registration.personalInformation" var="personal" />
-<fmt:message bundle="${loc}" key="local.registration.fullName"
-	var="fullName" />
-<fmt:message bundle="${loc}" key="local.registration.surname"
-	var="surname" />
+<fmt:message bundle="${loc}" key="local.registration.personalInformation" var="personal" />
+<fmt:message bundle="${loc}" key="local.registration.newPersonalInformation" var="new_personal_information" />
+<fmt:message bundle="${loc}" key="local.registration.fullName" var="fullName" />
+<fmt:message bundle="${loc}" key="local.registration.surname" var="surname" />
 <fmt:message bundle="${loc}" key="local.registration.name" var="name" />
-<fmt:message bundle="${loc}" key="local.registration.patronymic"
-	var="patronymic" />
-<fmt:message bundle="${loc}" key="local.registration.birthDay"
-	var="birthday" />
-<fmt:message bundle="${loc}" key="local.registration.month.january"
-	var="january" />
-<fmt:message bundle="${loc}" key="local.registration.month.february"
-	var="february" />
-<fmt:message bundle="${loc}" key="local.registration.month.march"
-	var="march" />
-<fmt:message bundle="${loc}" key="local.registration.month.april"
-	var="april" />
-<fmt:message bundle="${loc}" key="local.registration.month.may"
-	var="may" />
-<fmt:message bundle="${loc}" key="local.registration.month.june"
-	var="june" />
-<fmt:message bundle="${loc}" key="local.registration.month.july"
-	var="july" />
-<fmt:message bundle="${loc}" key="local.registration.month.august"
-	var="august" />
-<fmt:message bundle="${loc}" key="local.registration.month.september"
-	var="september" />
-<fmt:message bundle="${loc}" key="local.registration.month.october"
-	var="october" />
-<fmt:message bundle="${loc}" key="local.registration.month.november"
-	var="november" />
-<fmt:message bundle="${loc}" key="local.registration.month.december"
-	var="december" />
-<fmt:message bundle="${loc}"
-	key="local.registration.recoveryInformation" var="recoveryInformation" />
+<fmt:message bundle="${loc}" key="local.registration.patronymic" var="patronymic" />
+<fmt:message bundle="${loc}" key="local.registration.birthDay" var="birthday" />
+<fmt:message bundle="${loc}" key="local.registration.month.january" var="january" />
+<fmt:message bundle="${loc}" key="local.registration.month.february" var="february" />
+<fmt:message bundle="${loc}" key="local.registration.month.march" var="march" />
+<fmt:message bundle="${loc}" key="local.registration.month.april" var="april" />
+<fmt:message bundle="${loc}" key="local.registration.month.may" var="may" />
+<fmt:message bundle="${loc}" key="local.registration.month.june" var="june" />
+<fmt:message bundle="${loc}" key="local.registration.month.july" var="july" />
+<fmt:message bundle="${loc}" key="local.registration.month.august" var="august" />
+<fmt:message bundle="${loc}" key="local.registration.month.september" var="september" />
+<fmt:message bundle="${loc}" key="local.registration.month.october" var="october" />
+<fmt:message bundle="${loc}" key="local.registration.month.november" var="november" />
+<fmt:message bundle="${loc}" key="local.registration.month.december" ar="december" />
+<fmt:message bundle="${loc}" key="local.registration.recoveryInformation" var="recoveryInformation" />
 <fmt:message bundle="${loc}" key="local.login" var="login" />
 <fmt:message bundle="${loc}" key="local.password" var="password" />
-<fmt:message bundle="${loc}" key="local.registration.controlButtons"
-	var="controlButtons" />
-<fmt:message bundle="${loc}" key="local.registration.submit"
-	var="submit" />
+<fmt:message bundle="${loc}" key="local.email" var="email" />
+<fmt:message bundle="${loc}" key="local.registration.controlButtons" var="controlButtons" />
+<fmt:message bundle="${loc}" key="local.registration.submit" var="submit" />
 <fmt:message bundle="${loc}" key="local.registration.reset" var="reset" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
 
 </head>
 <body>
-<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 	<div align="right">
 		<form action="Controller" method="post">
-			<input type="hidden" name="command" value="set_locale" /> <input
-				type="hidden" name="local" value="ru" /> <input type="hidden"
-				name="page" value="/WEB-INF/jsp/profile.jsp" /> <input
-				type="submit" value="${ru_button}" />
+			<input type="hidden" name="command" value="set_locale" />
+			<input type="hidden" name="local" value="ru" />
+			<input type="hidden" name="page" value="/WEB-INF/jsp/profile.jsp" />
+			<input type="submit" value="${ru_button}" />
 		</form>
 	</div>
 	<div align="right">
 		<form action="Controller" method="post">
-			<input type="hidden" name="command" value="set_locale" /> <input
-				type="hidden" name="local" value="en" /> <input type="hidden"
-				name="page" value="/WEB-INF/jsp/profile.jsp" /> <input
-				type="submit" value="${en_button}" />
+			<input type="hidden" name="command" value="set_locale" />
+			<input type="hidden" name="local" value="en" />
+			<input type="hidden" name="page" value="/WEB-INF/jsp/profile.jsp" />
+			<input type="submit" value="${en_button}" />
 		</form>
 	</div>	
 
 	<h1>My profile</h1>
-	<p>Surname: ${requestScope.registrationInfo.surname}</p>
-	<p>Name: ${requestScope.registrationInfo.name}</p>
-	<p>Patronymic: ${requestScope.registrationInfo.patronymic}</p>
-	<p>Birthday: ${requestScope.registrationInfo.birthday}</p>
-	<p>login: ${requestScope.registrationInfo.login}</p>
-	<p>Email: ${requestScope.registrationInfo.email}</p>
+	<p>${surname}: ${requestScope.registrationInfo.surname}</p>
+	<p>${name}: ${requestScope.registrationInfo.name}</p>
+	<p>${patronymic}: ${requestScope.registrationInfo.patronymic}</p>
+	<p>${birthday}: ${requestScope.registrationInfo.birthday}</p>
+	<p>${login}: ${requestScope.registrationInfo.login}</p>
+	<p>${email}: ${requestScope.registrationInfo.email}</p>
 
-	<h2>Enter new personal information</h2>
+	<h2>${new_personal_information}</h2>
 
 	<form action="Controller" method="post">
 		<input type="hidden" name="command" value="update_user" />
@@ -98,13 +79,9 @@
 			<legend>${personal}</legend>
 			<fieldset>
 				<legend>${fullName}</legend>
-				<label><input type="text" name="surname" value="${surname}"
-					autofocus required pattern="[А-Яа-яЁё]{2,25}" maxlength="25"></label><br>
-				<label><input type="text" name="name" value="${name}"
-					required pattern="[А-Яа-яЁё]{2,25}" maxlength="25"></label><br>
-				<label><input type="text" name="patronymic"
-					value="${patronymic}" required pattern="[А-Яа-яЁё]{2,25}"
-					maxlength="25"></label><br>
+				<label><input type="text" name="surname" value="${surname}" autofocus required pattern="[А-Яа-яЁё]{2,25}" maxlength="25"></label><br>
+				<label><input type="text" name="name" value="${name}" required pattern="[А-Яа-яЁё]{2,25}" maxlength="25"></label><br>
+				<label><input type="text" name="patronymic" value="${patronymic}" required pattern="[А-Яа-яЁё]{2,25}" maxlength="25"></label><br>
 			</fieldset>
 
 			<fieldset>
@@ -129,12 +106,9 @@
 
 			<fieldset>
 				<legend>${recoveryInformation}</legend>
-				<label><input type="text" name="login" required
-					pattern="[a-zA-Z0-9]{2,20}">${login}</label><br> <label><input
-					type="password" name="password" required
-					pattern="[a-zA-Z0-9]{5,20}" autocomplete="off">${password}</label><br>
-				<label><input type="email" name="email" required
-					pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+"> Email</label>
+				<label><input type="text" name="login" required pattern="[a-zA-Z0-9]{2,20}">${login}</label><br> 
+				<label><input type="password" name="password" required pattern="[a-zA-Z0-9]{5,20}" autocomplete="off">${password}</label><br>
+				<label><input type="email" name="email" required pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+"> ${email}</label>
 			</fieldset>
 
 			<fieldset>

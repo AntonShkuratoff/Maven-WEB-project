@@ -11,18 +11,21 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.authorization.head" var="head" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
 <fmt:message bundle="${loc}" key="local.login" var="login" />
 <fmt:message bundle="${loc}" key="local.password" var="password" />
-<fmt:message bundle="${loc}" key="local.registration.submit"
-	var="submit" />
+<fmt:message bundle="${loc}" key="local.registration.submit" var="submit" />
+<fmt:message bundle="${loc}" key="local.send" var="send" />
+<fmt:message bundle="${loc}" key="local.news.redactor" var="news_redactor"/>
+<fmt:message bundle="${loc}" key="local.news.title" var="news_title"/>
+<fmt:message bundle="${loc}" key="local.news.brief" var="news_brief"/>
+<fmt:message bundle="${loc}" key="local.news.content" var="news_content"/>
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
 
 </head>
 <body>
-<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 
 	<div align="right">
 		<form action="Controller" method="post">
@@ -50,11 +53,11 @@
 		<input type="hidden" name="userId" value="${sessionScope.user.id}" />
 
 		<fieldset>
-			<legend>News redactor</legend>
-			<label><input type="text" name="title" value="Title" required></label><br>
-			<textarea name="brief" cols="50" rows="5">Brief</textarea><br>
-			<textarea name="content" cols="50" rows="20">Content</textarea><br>
-			<br> <input type="submit" value="Send">
+			<legend>${news_redactor}</legend>
+			<label><input type="text" name="title" value="${news_title}" required></label><br>
+			<textarea name="brief" cols="50" rows="5">${news_brief}</textarea><br>
+			<textarea name="content" cols="50" rows="20">${news_content}</textarea><br>
+			<br> <input type="submit" value="${send}">
 		</fieldset>
 	</form>
 </body>

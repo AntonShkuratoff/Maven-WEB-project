@@ -47,13 +47,14 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.title" var="title" />
-<fmt:message bundle="${loc}" key="local.registration" var="registration" />
-<fmt:message bundle="${loc}" key="local.authorization"
-	var="authorization" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.ru"
-	var="ru_button" />
-<fmt:message bundle="${loc}" key="local.locbutton.name.en"
-	var="en_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
+<fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.logout" var="log_out" />
+<fmt:message bundle="${loc}" key="local.myProfile" var="my_profile" />
+<fmt:message bundle="${loc}" key="local.news.offer" var="offer_news" />
+<fmt:message bundle="${loc}" key="local.news.myOffer" var="my_offered_news" />
+<fmt:message bundle="${loc}" key="local.news.favorite" var="my_favorite_news" />
+
 
 </head>
 <body>
@@ -62,18 +63,18 @@
 		<div class="buttons">
 			<div align="right">
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="set_locale" /> <input
-						type="hidden" name="local" value="ru" /> <input type="hidden"
-						name="page" value="/WEB-INF/jsp/user_main_page.jsp" /> <input type="submit"
-						value="${ru_button}" />
+					<input type="hidden" name="command" value="set_locale" />
+					<input type="hidden" name="local" value="ru" />
+					<input type="hidden" name="page" value="/WEB-INF/jsp/user_main_page.jsp" />
+					<input type="submit" value="${ru_button}" />
 				</form>
 			</div>
 			<div align="right">
 				<form action="Controller" method="post">
-					<input type="hidden" name="command" value="set_locale" /> <input
-						type="hidden" name="local" value="en" /> <input type="hidden"
-						name="page" value="/WEB-INF/jsp/user_main_page.jsp" /> <input type="submit"
-						value="${en_button}" />
+					<input type="hidden" name="command" value="set_locale" />
+					<input type="hidden" name="local" value="en" />
+					<input type="hidden" name="page" value="/WEB-INF/jsp/user_main_page.jsp" />
+					<input type="submit" value="${en_button}" />
 				</form>
 			</div>
 		</div>
@@ -90,14 +91,14 @@
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="go_to_profile">
-						<input type="submit" value="My profile">
+						<input type="submit" value="${my_profile}">
 					</form>
 				</div>
 				
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="go_to_news_redactor">
-						<input type="submit" value="Offer news">
+						<input type="submit" value="${offer_news}">
 					</form>
 				</div>
 				
@@ -106,21 +107,21 @@
 						<input type="hidden" name="command" value="GO_TO_USERS_NEWS">
 						<input type="hidden" name="userId" value="${sessionScope.user.id}">
 						<input type="hidden" name="role" value="${sessionScope.user.role}">
-						<input type="submit" value="My offered news">
+						<input type="submit" value="${my_offered_news}">
 					</form>
 				</div>
 				
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="GO_TO_FAVORITE">
-						<input type="submit" value="Favorite news">
+						<input type="submit" value="${my_favorite_news}">
 					</form>
 				</div>
 
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="log_out">
-						<input type="submit" value="Log Out">
+						<input type="submit" value="${log_out}">
 					</form>
 				</div>
 			</div>

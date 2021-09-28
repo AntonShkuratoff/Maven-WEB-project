@@ -1,8 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="by.itacademy.newsportal.bean.News"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,10 +46,11 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.title" var="title" />
-<fmt:message bundle="${loc}" key="local.registration" var="registration" />
-<fmt:message bundle="${loc}" key="local.authorization" var="authorization" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.ru" var="ru_button" />
 <fmt:message bundle="${loc}" key="local.locbutton.name.en" var="en_button" />
+<fmt:message bundle="${loc}" key="local.logout" var="log_out" />
+<fmt:message bundle="${loc}" key="local.news.add" var="add_news" />
+<fmt:message bundle="${loc}" key="local.news.offered" var="offered_news" />
 
 </head>
 <body>
@@ -85,7 +85,7 @@
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="go_to_news_redactor">
-						<input type="submit" value="Add news">
+						<input type="submit" value="${add_news}">
 					</form>
 				</div>
 				
@@ -94,14 +94,14 @@
 						<input type="hidden" name="command" value="GO_TO_USERS_NEWS">
 						<input type="hidden" name="userId" value="${sessionScope.user.id}">
 						<input type="hidden" name="role" value="${sessionScope.user.role}">
-						<input type="submit" value="Offered News">
+						<input type="submit" value="${offered_news}">
 					</form>
 				</div>
 
 				<div class="art_ex" align="right">
 					<form action="Controller" method="post">
 						<input type="hidden" name="command" value="log_out">
-						<input type="submit" value="Log Out">
+						<input type="submit" value="${log_out}">
 					</form>
 				</div>
 			</div>
