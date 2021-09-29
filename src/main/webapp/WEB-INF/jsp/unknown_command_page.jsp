@@ -22,10 +22,10 @@
 	<p>${message} <a href="http://localhost:8080/NewsPortal">${homepage}</a></p>
 	
 	<%
-	if (request.getAttribute("errorArray") != null) {
-		List<String> errorArray = new ArrayList<String>();
-		errorArray = (List<String>) request.getAttribute("errorList");
-		for (String error : errorArray) {
+	if (request.getAttribute("errorList") != null) {
+		List<String> errorList = new ArrayList<String>();
+		errorList = (List<String>) request.getAttribute("errorList");
+		for (String error : errorList) {
 			out.print(error);
 		}
 	}

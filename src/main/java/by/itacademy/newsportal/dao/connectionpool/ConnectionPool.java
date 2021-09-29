@@ -45,7 +45,7 @@ public final class ConnectionPool {
 	private final static String REMOVE_CONNECTION_FROM_GIVEN_AWAY_COLLECTION_ERROR = "Error deleting connecting from the given away connection pool.";
 	private final static String ADD_CONNECTION_TO_CONNECTION_QUEUE_ERROR = "Error allocating connection in the pool.";
 
-	public static ConnectionPool getInstance() throws ConnectionPoolException {
+	public static ConnectionPool getInstance() throws ConnectionPoolException {				
 		if (count == 0) {
 			INSTANCE.initPoolData();
 		}
@@ -65,7 +65,7 @@ public final class ConnectionPool {
 			poolSize = 5;
 		}
 	}
-
+	
 	public void initPoolData() throws ConnectionPoolException {
 		try {
 			Class.forName(driverName);
@@ -99,6 +99,16 @@ public final class ConnectionPool {
 			throw new SQLException(CLOSING_CONECTION_ERROR, e);
 		}
 	}
+	
+	private void closeConnectionQueue(BlockingQueue<Connection> queue) throws SQLException {
+		Connection connection;
+		while ((connection = queue.poll()) != null) {
+			if (!connection.getAutoCommit()) {
+				connection.commit();
+			}
+			((PooledConnection) connection).reallyClose();
+		}
+	}	
 
 	public Connection takeConnection() throws ConnectionPoolException {
 		Connection connection = null;
@@ -109,19 +119,13 @@ public final class ConnectionPool {
 			throw new ConnectionPoolException(CONNECTING_TO_DATA_SOURCE_ERROR, e);
 		}
 		return connection;
-	}
-
-	private void closeConnectionQueue(BlockingQueue<Connection> queue) throws SQLException {
-		Connection connection;
-		while ((connection = queue.poll()) != null) {
-			if (!connection.getAutoCommit()) {
-				connection.commit();
-			}
-			((PooledConnection) connection).reallyClose();
-		}
-	}
+	}	
 
 	public void closeConnection(Connection con, PreparedStatement ps, ResultSet rs) throws ConnectionPoolException {
+		if (con == null || ps == null || rs == null) {
+			throw new ConnectionPoolException(CONNECTING_TO_DATA_SOURCE_ERROR);
+		}
+		
 		try {
 			con.close();
 		} catch (SQLException e) {
@@ -142,6 +146,10 @@ public final class ConnectionPool {
 	}
 
 	public void closeConnection(Connection con, PreparedStatement ps) throws ConnectionPoolException {
+		if (con == null || ps == null) {
+			throw new ConnectionPoolException(CONNECTING_TO_DATA_SOURCE_ERROR);
+		}
+		
 		try {
 			con.close();
 		} catch (SQLException e) {

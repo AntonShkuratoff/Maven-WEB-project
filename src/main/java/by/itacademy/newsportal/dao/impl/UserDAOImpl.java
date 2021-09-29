@@ -60,6 +60,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -97,6 +98,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -123,6 +125,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -156,6 +159,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -198,6 +202,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -235,6 +240,7 @@ public class UserDAOImpl implements UserDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);

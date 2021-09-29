@@ -45,7 +45,7 @@ public class NewsDAOImpl implements NewsDAO {
 	private final static String COMMENT_NEWS_SQL = "INSERT INTO comments(user_id, news_id, content, date) VALUES(?,?,?,?)";
 	private final static String SELECT_COMMENTS_BY_NEWS_ID_SQL = "SELECT * FROM comments WHERE news_id=?";
 	private final static String DELETE_COMMENT_SQL = "DELETE FROM comments WHERE id=? AND user_id=?";
-	private final static String SUGGEST_NEWS_SQL = "INSERT INTO news_from_users(title, brief, content, date, user_id) VALUES(?,?,?,?,?)";
+	private final static String SUGGEST_NEWS_SQL = "INSERT INTO news_from_users(title, brief, content, date, user_id) VALUES(?,?,?,?,?)";	
 
 	private final static String ID = "id";
 	private final static String NEWS_ID = "news_id";
@@ -119,7 +119,8 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
-				connectionPool.closeConnection(con, ps, rs);
+				if (connectionPool != null)
+				connectionPool.closeConnection(con, ps, rs);							
 			} catch (ConnectionPoolException e) {
 				log.error(e);
 				throw new DAOException(e);
@@ -156,12 +157,13 @@ public class NewsDAOImpl implements NewsDAO {
 				news = new News(id, title, brief, content, date);
 				newsList.add(news);
 			}
-
+			
 		} catch (ConnectionPoolException | SQLException e) {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -212,13 +214,14 @@ public class NewsDAOImpl implements NewsDAO {
 		} finally {
 			if (connection == null) {
 				try {
+					if (connectionPool != null)
 					connectionPool.closeConnection(con, ps, rs);
 				} catch (ConnectionPoolException e) {
 					log.error(e);
 					throw new DAOException(e);
 				}
-			} else {
-				try {
+			} else if (connectionPool != null) {
+				try {					
 					rs.close();
 					ps.close();
 				} catch (SQLException e) {
@@ -270,6 +273,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -311,12 +315,13 @@ public class NewsDAOImpl implements NewsDAO {
 		} finally {
 			if (connection == null) {
 				try {
+					if (connectionPool != null)
 					connectionPool.closeConnection(con, ps);
 				} catch (ConnectionPoolException e) {
 					log.error(e);
 					throw new DAOException(e);
 				}
-			} else {
+			} else if (connectionPool != null) {
 				try {
 					ps.close();
 				} catch (SQLException e) {
@@ -358,6 +363,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -385,6 +391,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -418,6 +425,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -447,6 +455,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -475,6 +484,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -504,6 +514,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -549,6 +560,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -576,6 +588,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
@@ -624,6 +637,7 @@ public class NewsDAOImpl implements NewsDAO {
 			throw new DAOException(e);
 		} finally {
 			try {
+				if (connectionPool != null)
 				connectionPool.closeConnection(con, ps, rs);
 			} catch (ConnectionPoolException e) {
 				log.error(e);
