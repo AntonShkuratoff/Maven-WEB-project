@@ -56,21 +56,19 @@ public class GoToMainPage implements Command {
 			return;
 		}
 
-		numberOfPages = (int) Math.ceil((double) numberOfEntries / TOTAL);
-
-		if (request.getParameter(PAGE) != null) {
-			pageNumber = Integer.parseInt(request.getParameter(PAGE));
-		}
-
-		startWith = (pageNumber - 1) * TOTAL;
+		numberOfPages = (int) Math.ceil((double) numberOfEntries / TOTAL);		
 
 		try {
+			if (request.getParameter(PAGE) != null) {
+				pageNumber = Integer.parseInt(request.getParameter(PAGE));
+			}
+			startWith = (pageNumber - 1) * TOTAL;			
 			newsList = NEWS_SERVICE.getLastNews(startWith, TOTAL);
-		} catch (ServiceException e) {
+		} catch (ServiceException | NumberFormatException e) {
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;
-		}
+		}		
 		
 		request.setAttribute(NEWS_LIST_ATTRIBUTE, newsList);		
 		request.setAttribute(NUMBER_OF_PAGES_ATTRIBUTE, numberOfPages);

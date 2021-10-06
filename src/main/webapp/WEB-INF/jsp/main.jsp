@@ -83,14 +83,14 @@
 
 			<div class="buttons">
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="registration">
 						<input type="submit" value="${registration}">
 					</form>
 				</div>
 
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="authorization">
 						<input type="submit" value="${authorization}">
 					</form>

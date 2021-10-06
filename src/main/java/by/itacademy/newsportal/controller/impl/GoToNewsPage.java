@@ -53,27 +53,27 @@ public class GoToNewsPage implements Command {
 		News news = null;
 		User user = null;
 		List<Comment> commentsList = new ArrayList<Comment>();
-		HttpSession session = request.getSession();				
-
-		if (request.getParameter(NEWS_ID) != null && 
-			request.getParameter(NEWS_TYPE) != null && 
-			session.getAttribute(USER) != null) 
-		{
-			newsId = Integer.valueOf(request.getParameter(NEWS_ID));
-			user = (User) session.getAttribute(USER);
-			userId = user.getId();
-			newsTipe = request.getParameter(NEWS_TYPE);
-		} else {
-			log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
-			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
-			return;
-		}
+		HttpSession session = request.getSession();	
 
 		try {
+			if (request.getParameter(NEWS_ID) != null && 
+					request.getParameter(NEWS_TYPE) != null && 
+					session.getAttribute(USER) != null) 
+				{
+					newsId = Integer.valueOf(request.getParameter(NEWS_ID));
+					user = (User) session.getAttribute(USER);
+					userId = user.getId();
+					newsTipe = request.getParameter(NEWS_TYPE);
+				} else {
+					log.error(LOG_NOT_ALL_REQUEST_PARAMETERS);
+					response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
+					return;
+				}			
+			
 			news = NEWS_SERVICE.getNewsByID(newsId, newsTipe);
 			commentsList = NEWS_SERVICE.selectNewsComments(newsId);
 			flag = NEWS_SERVICE.isFavorite(userId, newsId);
-		} catch (ServiceException e) {
+		} catch (ServiceException | NumberFormatException e) {
 			e.printStackTrace();
 			response.sendRedirect(REDIRECT_UNKNOWN_COMMAND_PATH);
 			return;

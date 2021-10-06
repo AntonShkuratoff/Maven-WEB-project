@@ -16,10 +16,11 @@
 <fmt:message bundle="${loc}" key="local.login" var="login" />
 <fmt:message bundle="${loc}" key="local.password" var="password" />
 <fmt:message bundle="${loc}" key="local.registration.submit" var="submit" />
+<fmt:message bundle="${loc}" key="local.backToMain" var="back_to_main"/>
 
 </head>
 <body>
-<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">Back to Main page</a>
+<a href="http://localhost:8080/NewsPortal/Controller?command=go_to_main_page&page=1">${back_to_main}</a>
 
 	<div align="right">
 		<form action="Controller" method="post">

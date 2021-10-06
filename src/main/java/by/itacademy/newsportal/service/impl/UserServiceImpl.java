@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 		}
 		try {
 			USER_DAO.registrationUser(info);
-			return null;
+			return err;
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
