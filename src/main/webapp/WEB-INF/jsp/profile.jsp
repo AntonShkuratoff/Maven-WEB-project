@@ -12,7 +12,7 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="resources.localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.registration.head" var="head" />
+<fmt:message bundle="${loc}" key="local.profile.head" var="head" />
 <fmt:message bundle="${loc}" key="local.registration.personalInformation" var="personal" />
 <fmt:message bundle="${loc}" key="local.registration.newPersonalInformation" var="new_personal_information" />
 <fmt:message bundle="${loc}" key="local.registration.fullName" var="fullName" />
@@ -63,7 +63,7 @@
 		</form>
 	</div>	
 
-	<h1>My profile</h1>
+	<h1>${head}</h1>
 	<p>${surname}: ${requestScope.registrationInfo.surname}</p>
 	<p>${name}: ${requestScope.registrationInfo.name}</p>
 	<p>${patronymic}: ${requestScope.registrationInfo.patronymic}</p>

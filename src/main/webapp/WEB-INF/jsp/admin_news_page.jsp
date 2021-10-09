@@ -70,7 +70,7 @@
 		<input type="hidden" name="command" value="delete_news" />
 		<input type="hidden" name="newsId" value="${requestScope.news.id}" />
 		<input type="hidden" name="news_type" value="published" />
-		<input type="hidden" name="role" value="ADMIN" />
+		<input type="hidden" name="role" value="ADMIN"/>
 		<fieldset>
 			<legend>${news_delete}</legend>			
 			<br> <input type="submit" value="${delete}">

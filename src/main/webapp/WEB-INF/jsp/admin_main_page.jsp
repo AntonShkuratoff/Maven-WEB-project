@@ -83,17 +83,15 @@
 			<div class="buttons">				
 				
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="go_to_news_redactor">
 						<input type="submit" value="${add_news}">
 					</form>
 				</div>
 				
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="GO_TO_USERS_NEWS">
-						<input type="hidden" name="userId" value="${sessionScope.user.id}">
-						<input type="hidden" name="role" value="${sessionScope.user.role}">
 						<input type="submit" value="${offered_news}">
 					</form>
 				</div>

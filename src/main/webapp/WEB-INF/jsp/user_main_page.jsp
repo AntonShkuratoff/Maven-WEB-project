@@ -89,14 +89,14 @@
 			<div class="buttons">
 				<p align="right">Hello, ${sessionScope.user.login}</p>
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="go_to_profile">
 						<input type="submit" value="${my_profile}">
 					</form>
 				</div>
 				
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="go_to_news_redactor">
 						<input type="submit" value="${offer_news}">
 					</form>
@@ -112,14 +112,14 @@
 				</div>
 				
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="GO_TO_FAVORITE">
 						<input type="submit" value="${my_favorite_news}">
 					</form>
 				</div>
 
 				<div class="art_ex" align="right">
-					<form action="Controller" method="post">
+					<form action="Controller" method="get">
 						<input type="hidden" name="command" value="log_out">
 						<input type="submit" value="${log_out}">
 					</form>

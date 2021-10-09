@@ -48,8 +48,7 @@ public final class ConnectionPool {
 	public static ConnectionPool getInstance() throws ConnectionPoolException {				
 		if (count == 0) {
 			INSTANCE.initPoolData();
-		}
-		count++;
+		}		
 		return INSTANCE;
 	}
 
@@ -66,7 +65,8 @@ public final class ConnectionPool {
 		}
 	}
 	
-	public void initPoolData() throws ConnectionPoolException {
+	private void initPoolData() throws ConnectionPoolException {
+		count = 1;
 		try {
 			Class.forName(driverName);
 			givenAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
